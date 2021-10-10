@@ -15,5 +15,4 @@ public interface MemberRepository {
     Page<Member> findAll(Pageable pageable);
     Page<Member> findByEmail(String Email, Pageable pageable);
     Page<Member> findByName(String Name, Pageable pageable);
-//    Page<MemberResponseDto> findAllWithOrder(Pageable pageable);
 }

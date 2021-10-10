@@ -28,12 +28,12 @@ public class Order {
     @Column
     LocalDateTime createdAt;
 
-
     @Builder
-    public Order(String orderNumber, Long ownerUid, String productName) {
+    public Order(Long uid, String orderNumber, Long ownerUid, String productName, LocalDateTime createdAt) {
+        this.uid = uid;
         this.orderNumber = orderNumber;
-//        this.ownerUid = ownerUid;
+        this.ownerUid = ownerUid;
         this.productName = productName;
-        this.createdAt = LocalDateTime.now();
+        this.createdAt = createdAt;
     }
 }

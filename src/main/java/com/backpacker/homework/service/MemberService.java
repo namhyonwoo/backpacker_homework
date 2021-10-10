@@ -46,13 +46,8 @@ public class MemberService {
      */
     public Page<MemberResponseDto> findMembers(Pageable pageable, String filterName, String filterValue) {
 
-//        if (filterName.equals("email")) {
-//            return memberRepository.findByEmail(filterValue, pageable);
-//        } else if (filterName.equals("name")) {
-//            return memberRepository.findByName(filterValue, pageable);
-//        } else {
-            return jpaMemberRepository.findAllWithOrder(pageable);
-//        }
+            return jpaMemberRepository.findAllWithOrder(pageable, filterName, filterValue);
+
     }
 
 
