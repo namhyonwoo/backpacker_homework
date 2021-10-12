@@ -1,6 +1,6 @@
 # backpacker_homework
 ## 백패커/아이디어스 개발과제
-
+```개발환경 JAVA, SPRING BOOT 2.5, GRADLE 7```
 ### 자바 패키지 
   - webapp\src\main\java\com\backpacker\homework
 - controller
