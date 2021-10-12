@@ -7,6 +7,7 @@ import com.backpacker.homework.domain.Member;
 import com.backpacker.homework.service.MemberService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +34,7 @@ public class MemberApiController {
      */
     @PostMapping("/member/join")
     @ResponseBody
+    @Operation(summary = "회원가입", description = "회원정보를 받아 저장한다")
     public ResponseEntity join(@RequestBody @Valid MemberSaveDto memberSaveDto) {
         try {
             Long result = memberService.join(memberSaveDto);
@@ -51,18 +53,11 @@ public class MemberApiController {
      */
     @PostMapping("/member/login")
     @ResponseBody
+    @Operation(summary = "로그인", description = "이메일과 비밀번호 인증을 한다")
     public ResponseEntity login(@ApiIgnore HttpSession session, @RequestParam String email, @RequestParam String password) {
-        try {
-            Member member = memberService.login(email, password);
-            session.setAttribute("loginMember", member);
-            return ResponseEntity.ok().build();
-        } catch (IllegalArgumentException e) {
-            Map<String, String> errors = new HashMap<>();
-            errors.put("BAD_REQUEST", e.getMessage());
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(ErrorMessages.builder().errors(errors).build());
-        }
+        Member member = memberService.login(email, password);
+        session.setAttribute("loginMember", member);
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -80,6 +75,7 @@ public class MemberApiController {
      */
     @GetMapping("/member/{uid}")
     @ResponseBody
+    @Operation(summary = "단일 회원 상세 정보 조회", description = "회원고유번호(uid)로  상세정보를 조회한다")
     public ResponseEntity<Member> member(@PathVariable Long uid) {
         Member member = memberService.findMember(uid);
         return ResponseEntity.ok().body(member);
@@ -90,6 +86,7 @@ public class MemberApiController {
      */
     @GetMapping("/members")
     @ResponseBody
+    @Operation(summary = "여러 회원 목록 조회", description = "여러회원의 정보를 조회한다. 이메일또는 이름으로 검색이 가능하다")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "filterName", value = "검색조건(email, name)"),
             @ApiImplicitParam(name = "filterValue", value = "검색내용"),
