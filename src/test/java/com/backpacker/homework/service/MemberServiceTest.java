@@ -1,6 +1,5 @@
 package com.backpacker.homework.service;
 
-import com.backpacker.homework.Repository.MemberRepository;
 import com.backpacker.homework.controller.dto.MemberSaveDto;
 import com.backpacker.homework.domain.Member;
 import org.junit.jupiter.api.Test;
@@ -10,16 +9,18 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 @SpringBootTest
-@Transactional //자동롤백
+@Transactional
 public class MemberServiceTest {
 
     @Autowired
     MemberService memberService;
 
+
     @Test
-    public void 회원가입(){
+    public void 회원가입() {
         //given
         MemberSaveDto memberSaveDto = MemberSaveDto.builder()
                 .name("name")
@@ -36,6 +37,26 @@ public class MemberServiceTest {
         //then
         Member findMember = memberService.findMember(saveId);
         assertThat(memberSaveDto.getName()).isEqualTo(findMember.getName());
+    }
+
+    @Test
+    public void 로그인() {
+        //given
+        MemberSaveDto memberSaveDto = MemberSaveDto.builder()
+                .name("name")
+                .nickname("cuya")
+                .email("avvc!s@abc.com")
+                .gender("M")
+                .phone("01099998888")
+                .password("password!@#")
+                .build();
+
+        //when
+        //then
+        assertThatCode(() -> memberService.join(memberSaveDto))
+                .doesNotThrowAnyException();
+
 
     }
+
 }

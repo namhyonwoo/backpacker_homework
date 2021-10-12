@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -91,15 +92,14 @@ public class MemberApiController {
     @GetMapping("/members")
     @ResponseBody
     @ApiImplicitParams({
-            @ApiImplicitParam(name="filterName", value = "검색조건(email, name)"),
-            @ApiImplicitParam(name="filterValue", value = "검색내용"),
-            @ApiImplicitParam(name="page", value = "현재 페이지")
+            @ApiImplicitParam(name = "filterName", value = "검색조건(email, name)"),
+            @ApiImplicitParam(name = "filterValue", value = "검색내용"),
+            @ApiImplicitParam(name = "page", value = "현재 페이지")
     })
     public ResponseEntity<Page<MemberResponseDto>> members(@RequestParam(defaultValue = "1") Integer page, @RequestParam(required = false, defaultValue = "") String filterName, @RequestParam(required = false, defaultValue = "") String filterValue) {
 
         Pageable pageable = PageRequest.of(page - 1, 5);
 
-        //회원의 마지막 주문을 가져와야한다.
         return ResponseEntity
                 .ok()
                 .body(memberService.findMembers(pageable, filterName, filterValue));

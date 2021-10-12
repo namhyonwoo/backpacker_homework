@@ -62,7 +62,6 @@ public class MemberService {
     public Page<MemberResponseDto> findMembers(Pageable pageable, String filterName, String filterValue) {
 
         return memberJpaRepository.findAllWithOrder(pageable, filterName, filterValue);
-
     }
 
 

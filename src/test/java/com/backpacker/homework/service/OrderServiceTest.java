@@ -25,7 +25,5 @@ public class OrderServiceTest {
         //when
         Long saveId = orderService.saveOrder(order);
 
-        System.out.println("saveId = "+saveId);
-
     }
 }
