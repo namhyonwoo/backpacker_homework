@@ -1,6 +1,6 @@
 package com.backpacker.homework;
 
-import com.backpacker.homework.Repository.JpaMemberRepository;
+import com.backpacker.homework.Repository.MemberJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ public class SpringConfig {
     }
 
     @Bean
-    public JpaMemberRepository jpaMemberRepository(){
-        return new JpaMemberRepository(em);
+    public MemberJpaRepository jpaMemberRepository(){
+        return new MemberJpaRepository(em);
     }
 }

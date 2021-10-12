@@ -19,11 +19,10 @@ public class MemberResponseDto {
     private String password;
     private String gender;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
     private Order order;
 
-    public MemberResponseDto(BigInteger uid, String email, String name, String nickname, String phone, String password, Character gender, Timestamp createdAt, Timestamp updatedAt, BigInteger orderUid, String orderNumber, BigInteger orderOwnerUid, String orderProductName, Timestamp orderCreatedAt) {
+    public MemberResponseDto(BigInteger uid, String email, String name, String nickname, String phone, String password, Character gender, Timestamp createdAt, BigInteger orderUid, String orderNumber, BigInteger orderOwnerUid, String orderProductName, Timestamp orderCreatedAt) {
         this.uid = uid.longValue();
         this.email = email;
         this.name = name;
@@ -32,7 +31,7 @@ public class MemberResponseDto {
         this.password = password;
         this.gender = gender == null ? null : gender.toString();
         this.createdAt = createdAt.toLocalDateTime();
-        this.updatedAt = updatedAt == null ? null : updatedAt.toLocalDateTime();
+//        this.updatedAt = updatedAt == null ? null : updatedAt.toLocalDateTime();
 
 //        this.orderUid = orderUid == null ? null : orderUid.longValue();
 //        this.orderNumber = orderNumber == null ? null : orderNumber;

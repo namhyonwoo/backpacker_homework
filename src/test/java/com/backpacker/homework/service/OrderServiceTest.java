@@ -4,7 +4,6 @@ import com.backpacker.homework.domain.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -15,12 +14,12 @@ public class OrderServiceTest {
     OrderService orderService;
 
     @Test
-    @Commit
     public void 주문서_저장(){
         //given
         Order order = Order.builder()
-                .orderNumber("asdbjsad123123")
-                .productName("상품1")
+                .orderNumber("ABC1234")
+                .ownerUid(5L)
+                .productName("상품23231")
                 .build();
 
         //when

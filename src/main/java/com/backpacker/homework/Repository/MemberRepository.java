@@ -12,6 +12,7 @@ public interface MemberRepository {
     Member save(Member member);
     Optional<Member> findById(Long uid);
     Optional<Member> findByEmail(String email);
+    Optional<Member> findByEmailAndPassword(String email, String password);
     Page<Member> findAll(Pageable pageable);
     Page<Member> findByEmail(String Email, Pageable pageable);
     Page<Member> findByName(String Name, Pageable pageable);

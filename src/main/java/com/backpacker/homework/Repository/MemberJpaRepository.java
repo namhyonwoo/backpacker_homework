@@ -12,12 +12,12 @@ import javax.persistence.Query;
 import java.math.BigInteger;
 import java.util.List;
 
-public class JpaMemberRepository {
+public class MemberJpaRepository {
 
     private final EntityManager em;
 
     @Autowired
-    public JpaMemberRepository(EntityManager em) {
+    public MemberJpaRepository(EntityManager em) {
         this.em = em;
     }
 

@@ -1,52 +1,67 @@
 package com.backpacker.homework.service;
 
-import com.backpacker.homework.Repository.JpaMemberRepository;
+import com.backpacker.homework.Repository.MemberJpaRepository;
 import com.backpacker.homework.Repository.MemberRepository;
 import com.backpacker.homework.controller.dto.MemberResponseDto;
 import com.backpacker.homework.controller.dto.MemberSaveDto;
 import com.backpacker.homework.domain.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final JpaMemberRepository jpaMemberRepository;
-
-    @Autowired
-    public MemberService(MemberRepository memberRepository, JpaMemberRepository jpaMemberRepository) {
-        this.memberRepository = memberRepository;
-        this.jpaMemberRepository = jpaMemberRepository;
-    }
+    private final MemberJpaRepository memberJpaRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 회원 가입
      */
-    public Long join(MemberSaveDto memberSaveDto){
+    public Long join(MemberSaveDto memberSaveDto) {
         validateDuplicateMember(memberSaveDto);
+
+        memberSaveDto.setPassword(passwordEncoder.encode(memberSaveDto.getPassword()));
         return memberRepository.save(memberSaveDto.toEntity()).getUid();
+    }
+
+    /**
+     * 로그인
+     */
+    public Member login(String email, String password) {
+
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. email=" + email));
+
+        if (!passwordEncoder.matches(password, member.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        return member;
     }
 
     /**
      * 회원 조회
      */
-    public Member findMember(Long uid){
+    public Member findMember(Long uid) {
         Member member = memberRepository.findById(uid)
-                .orElseThrow(()-> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. uid=" + uid));
         return member;
     }
+
 
     /**
      * 전체 회원 조회
      */
     public Page<MemberResponseDto> findMembers(Pageable pageable, String filterName, String filterValue) {
 
-            return jpaMemberRepository.findAllWithOrder(pageable, filterName, filterValue);
+        return memberJpaRepository.findAllWithOrder(pageable, filterName, filterValue);
 
     }
 

@@ -4,6 +4,7 @@ import com.backpacker.homework.domain.Member;
 import com.backpacker.homework.domain.Order;
 import com.backpacker.homework.service.MemberService;
 import com.backpacker.homework.service.OrderService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,14 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class OrderApiController {
 
     private final OrderService orderService;
-
-    @Autowired
-    public OrderApiController(OrderService orderService) {
-        this.orderService = orderService;
-    }
 
     /**
      * 단일 회원의 주문목록 조회

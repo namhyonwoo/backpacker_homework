@@ -18,31 +18,24 @@ public class MemberServiceTest {
     @Autowired
     MemberService memberService;
 
-/*    @Test
-    @Commit
+    @Test
     public void 회원가입(){
         //given
         MemberSaveDto memberSaveDto = MemberSaveDto.builder()
                 .name("name")
                 .nickname("cuya")
-                .email("abc@abc.com")
+                .email("abc11123123@abc.com")
                 .gender("M")
                 .phone("01099998888")
-                .password("password")
+                .password("password!@#")
                 .build();
 
         //when
         Long saveId = memberService.join(memberSaveDto);
 
         //then
-        Member findMember = memberService.findOne(saveId).get();
+        Member findMember = memberService.findMember(saveId);
         assertThat(memberSaveDto.getName()).isEqualTo(findMember.getName());
 
-    }*/
-
-    @Test
-    public void 중복_회원_예외(){
-        //given
-        Member member1 = new Member();
     }
 }
