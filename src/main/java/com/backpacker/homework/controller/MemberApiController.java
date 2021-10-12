@@ -8,7 +8,6 @@ import com.backpacker.homework.service.MemberService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -98,6 +97,7 @@ public class MemberApiController {
     })
     public ResponseEntity<Page<MemberResponseDto>> members(@RequestParam(defaultValue = "1") Integer page, @RequestParam(required = false, defaultValue = "") String filterName, @RequestParam(required = false, defaultValue = "") String filterValue) {
 
+        //페이지 시작점, 사이즈 세팅
         Pageable pageable = PageRequest.of(page - 1, 5);
 
         return ResponseEntity

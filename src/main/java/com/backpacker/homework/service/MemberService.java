@@ -60,7 +60,7 @@ public class MemberService {
      * 전체 회원 조회
      */
     public Page<MemberResponseDto> findMembers(Pageable pageable, String filterName, String filterValue) {
-
+        //jpa를 사용하여 조회
         return memberJpaRepository.findAllWithOrder(pageable, filterName, filterValue);
     }
 

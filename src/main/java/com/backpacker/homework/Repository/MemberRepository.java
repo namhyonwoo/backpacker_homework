@@ -1,6 +1,5 @@
 package com.backpacker.homework.Repository;
 
-import com.backpacker.homework.controller.dto.MemberResponseDto;
 import com.backpacker.homework.domain.Member;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
