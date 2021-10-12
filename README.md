@@ -10,7 +10,7 @@
 - service
   - 서비스 객체
 - repository
-  - repository 인터페이스와 구현체 (jpa, spring-data-jpa respository)
+  - repository 인터페이스와 구현체 (jpa, spring-data-jpa)
 - test
   - repository와 service 테스트 코드
 ### 로그인
